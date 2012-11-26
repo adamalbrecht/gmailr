@@ -8,7 +8,10 @@ Gmailr.debug = true; // Turn verbose debugging messages on
 
 Gmailr.init(function(G) {
     G.insertCss(getData('css_path'));
+    console.log("Inserting gmailr top status bar...");
     G.insertTop($("<div id='gmailr'><span>Gmailr Status:</span> <span id='status'>Loaded.</span> </div>"));
+    console.log("Inserting gmailr sidebar...");
+    G.insertRightSidebar($("<div id='GmailrSidebar'><span>Gmailr Sidebar Status:</span> <span id='status'>Loaded.</span> </div>"));
 
     var status = function(msg) {
         G.$('#gmailr #status').html(msg);

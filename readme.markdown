@@ -17,7 +17,7 @@ To install the extension, clone the repo and:
 3. Click "Load unpacked extension..."
 4. Choose the `chrome` directory in this repo.
 5. Enable the newly added extension.
-6. Head to your Gmail account, and you should now see a blue Gmailr bar above the top bar.
+6. Head to your Gmail account, and you should now see a blue Gmailr bar above the top bar and a blue sidebar to the right.
 
 Try archiving or deleting an email, and you'll see the status bar display the action.
 
@@ -74,6 +74,10 @@ Currently, you won't get any information about the contents of the email message
     G.insertTop(el)
     
 Inserts a DOM element on the top of Gmail's interface.
+
+    G.insertRightSidebar(el)
+    
+Inserts a DOM element into the right sidebar pane of Gmail's interface.
 
     G.$(selector)
     

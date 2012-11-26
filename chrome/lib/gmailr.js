@@ -104,6 +104,18 @@
         },
 
         /*
+            Insert an html widget into the right sidebar.
+        */
+
+        insertRightSidebar: function(el) {
+            if(!this.loaded) throw "Call to insertRightSidebar before Gmail has loaded";
+
+            var $widgetContainer = $("<div 'position: relative; top: 0px; z-index: 2; width: 210px; left: 0px; border-top-width: 0px; border-bottom-width: 0px;'></div>");
+            $widgetContainer.append(el);
+            this.elements.body.find('.Bu.y3 .nH.adC .nH:first').prepend($widgetContainer);
+        },
+
+        /*
             Allows you to apply jQuery selectors in the Gmail DOM, like so:
 
             G.$('.my_class');
