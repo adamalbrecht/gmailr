@@ -7,6 +7,10 @@
 
 (function($, window) {
 
+    // Important CSS Selectors
+    var SIDEBAR_WIDGET_CONTAINER_SELECTOR = ".Bu.y3 .nH.adC .nH:first";
+    var OTHER_PERSON_EMAIL_ADDRESS = "span.gD";
+
     // Utility methods
 
     var dbg = function(msg) {
@@ -112,7 +116,7 @@
 
             var $widgetContainer = $("<div 'position: relative; top: 0px; z-index: 2; width: 210px; left: 0px; border-top-width: 0px; border-bottom-width: 0px;'></div>");
             $widgetContainer.append(el);
-            this.elements.body.find('.Bu.y3 .nH.adC .nH:first').prepend($widgetContainer);
+            this.elements.body.find(SIDEBAR_WIDGET_CONTAINER_SELECTOR).prepend($widgetContainer);
         },
 
         /*
@@ -133,6 +137,18 @@
             var css = $('<link rel="stylesheet" type="text/css">');
             css.attr('href', cssFile);
             this.elements.canvas.find('head').first().append(css);
+        },
+
+        /**
+         * Email address of the currently viewed email/conversation
+         */
+        getOtherPersonEmailAddress: function() {
+          var emailSpan = this.$(OTHER_PERSON_EMAIL_ADDRESS);
+          if (emailSpan) {
+            return emailSpan.attr('email');
+          } else {
+            return null;
+          }
         },
 
         /**
