@@ -254,24 +254,26 @@
                     this.initialized = true;
                     var win = top.document.getElementById("js_frame").contentDocument.defaultView;
 
-                    win.XMLHttpRequest.prototype._Gmail_open = win.XMLHttpRequest.prototype.open;
-                    win.XMLHttpRequest.prototype.open = function (method, url, async, user, password) {
-                        var out = this._Gmail_open.apply(this, arguments);
-                        this.xhrParams = {
-                            method: method.toString(),
-                            url: url.toString()
-                        };
-                        return out;
-                    };
+                    if (win && win.XMLHttpRequest) {
+                      win.XMLHttpRequest.prototype._Gmail_open = win.XMLHttpRequest.prototype.open;
+                      win.XMLHttpRequest.prototype.open = function (method, url, async, user, password) {
+                          var out = this._Gmail_open.apply(this, arguments);
+                          this.xhrParams = {
+                              method: method.toString(),
+                              url: url.toString()
+                          };
+                          return out;
+                      };
 
-                    win.XMLHttpRequest.prototype._Gmail_send = win.XMLHttpRequest.prototype.send;
-                    win.XMLHttpRequest.prototype.send = function (body) {
-                        var out = this._Gmail_send.apply(this, arguments);
-                        if (this.xhrParams) {
-                            this.xhrParams.body = body;
-                            Gmailr.detectXHREvents(this.xhrParams);
-                        }
-                        return out;
+                      win.XMLHttpRequest.prototype._Gmail_send = win.XMLHttpRequest.prototype.send;
+                      win.XMLHttpRequest.prototype.send = function (body) {
+                          var out = this._Gmail_send.apply(this, arguments);
+                          if (this.xhrParams) {
+                              this.xhrParams.body = body;
+                              Gmailr.detectXHREvents(this.xhrParams);
+                          }
+                          return out;
+                      }
                     }
 
                     if (!top._Gmail_iframeFn) {
